@@ -1,0 +1,52 @@
+/* styles.css */
+
+body {
+    background-color: #1e1e1e; /* Dark background color */
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s ease; /* Smooth background color transition */
+}
+
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#letter-container {
+    font-size: 3em;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #3d3d3d; /* Letter container background color */
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #ff5e62; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth button color transition */
+}
+
+button:hover {
+    background-color: #ff4246; /* Button color on hover */
+}
