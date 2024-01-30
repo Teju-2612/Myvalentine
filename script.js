@@ -10,7 +10,7 @@ let currentDay = 0;
 
 function showClue() {
   const letterContainer = document.getElementById('letter-container');
-  letterContainer.innerHTML = clues[currentDay];
+  clueContainer.innerHTML = `Clue: ${clues[currentDay]}`;
 }
 
 function showLetter() {
