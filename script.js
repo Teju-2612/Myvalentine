@@ -22,12 +22,16 @@ const clueElement = document.querySelector('.clue');
 const imageElement = document.querySelector('.image');
 const timerElement = document.querySelector('.timer');
 
-function showImage(index) {
-    imageElement.src = images[index];
+function showImage() {
+    const imageElement = document.querySelector('.image');
+    const currentImageIndex = images.indexOf(`loveletter${clues[0].answer.toLowerCase()}.png`);
+
+    imageElement.src = images[currentImageIndex];
     imageElement.style.display = 'block';
 
     const timerDuration = 24 * 60 * 60 * 1000;
     let startTime = Date.now();
+    const timerElement = document.querySelector('.timer');
 
     function updateTimer() {
         const remainingTime = timerDuration - (Date.now() - startTime);
@@ -47,6 +51,7 @@ function showImage(index) {
     }
     setInterval(updateTimer, 1000);
 }
+
 
 function checkAnswer() {
     const answerInput = document.querySelector('#answer');
