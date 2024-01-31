@@ -3,6 +3,13 @@ body {
     overflow: hidden; /* Prevent scrollbars due to heart animation */
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Set the container height to fill the viewport */
+}
+
 @keyframes flyHeart {
     0% {
         transform: translateY(-50%);
@@ -30,32 +37,42 @@ body {
     transform: rotateY(180deg); /* Rotate the heart on the right side */
 }
 
-/* Existing styles remain unchanged */
+.content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+}
+
+.clue {
+    margin-bottom: 1rem; /* Add margin to separate clue from other elements */
+}
 
 #answer {
-    width: 100%; /* Set the width to 100% to match the parent container */
+    width: 100%;
     padding: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: block;
 }
 
-/* Remaining styles remain unchanged */
-
 #submit {
-    width: 4em; /* Set the width */
-    height: 4em; /* Set the height */
-    background-color: #ff5e62; /* Pink background color */
-    color: white; /* White text color */
+    width: 4em;
+    height: 4em;
+    background-color: #ff5e62;
+    color: white;
     border: none;
     cursor: pointer;
-    font-size: 1.2em; /* Set the font size */
-    position: relative; /* Required for the ::before pseudo-element */
+    font-size: 1.2em;
+    position: relative;
 }
 
 #submit::before {
-    content: '\2665'; /* Unicode heart symbol */
-    font-size: 1.2em; /* Set the font size */
+    content: '\2665';
+    font-size: 1.2em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -63,7 +80,7 @@ body {
 }
 
 #submit:hover {
-    background-color: #971b4d; /* Darker pink on hover */
+    background-color: #971b4d;
 }
 
 .image {
