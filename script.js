@@ -1,30 +1,20 @@
-const clues = [
-    { clue: 'Be grateful', answer: 'Thank' },
-    { clue: 'The man with the hottest body ever', answer: 'you' },
-    { clue: '4', answer: 'for' },
-    { clue: 'human-_____', answer: 'being' },
-    { clue: 'you are?', answer: 'mine' },
-    { clue: 'my beloved', answer: 'philtatos' },
-    // Add more clues as needed
-];
-
+const targetWords = ['Thank', 'you', 'for', 'being', 'mine', 'philtatos'];
+const clues = ['Be grateful', 'The man with the hottest body ever', '4', 'human-_____', 'you are?', 'my beloved'];
 const images = [
     'loveletter1.png',
     'loveletter1.png',
     'loveletter1.png',
     'loveletter1.png',
     'loveletter1.png',
-    'loveletter1.png',
-    // Add more image paths as needed
+    'loveletter1.png'
 ];
 
-const clueElement = document.querySelector('.clue');
-const imageElement = document.querySelector('.image');
-const timerElement = document.querySelector('.timer');
+let currentDay = 0;
+let canGuess = false;
 
 function showImage() {
     const imageElement = document.querySelector('.image');
-    const currentImageIndex = images.indexOf(`loveletter${clues[0].answer.toLowerCase()}.png`);
+    const currentImageIndex = targetWords.indexOf(clues[currentDay].toLowerCase());
 
     imageElement.src = images[currentImageIndex];
     imageElement.style.display = 'block';
@@ -38,6 +28,7 @@ function showImage() {
 
         if (remainingTime < 0) {
             startTime = Date.now();
+            canGuess = true; // Enable guessing when the timer reaches 0
             return;
         }
 
@@ -52,47 +43,36 @@ function showImage() {
     setInterval(updateTimer, 1000);
 }
 
-
 function checkAnswer() {
+    if (!canGuess) {
+        alert('You can only guess the second word after the timer reaches 0.');
+        return;
+    }
+
     const answerInput = document.querySelector('#answer');
     const answer = answerInput.value.trim().toLowerCase();
-    
-    // Get the current clue and image index
-    const currentClue = clues[0];
-    const currentImageIndex = images.findIndex(image => image.includes(currentClue.answer.toLowerCase()));
 
-    console.log('User Input:', answer);
-    console.log('Correct Answer:', currentClue.answer.toLowerCase());
+    if (answer === clues[currentDay].toLowerCase()) {
+        showImage();
+        currentDay++;
 
-    if (answer === currentClue.answer.toLowerCase()) {
-        showImage(currentImageIndex);
-
-        // Clear the input field
-        answerInput.value = '';
-
-        // Remove the first clue from the array
-        clues.shift();
-
-        // Update the clue and image
-        if (clues.length > 0) {
-            clueElement.textContent = clues[0].clue;
+        if (currentDay < targetWords.length) {
+            alert(`Congratulations! You revealed letter ${currentDay + 1}`);
+            canGuess = false; // Disable guessing until the timer reaches 0 again
         } else {
-            clueElement.textContent = 'All letters revealed!';
+            alert('All letters revealed!');
         }
-
-        // Reset the input field
-        answerInput.focus();
     } else {
         alert('Incorrect answer. Try again.');
-        answerInput.focus();
     }
+
+    // Clear the input field
+    answerInput.value = '';
+    answerInput.focus();
 }
 
+// Rest of your existing code...
+
+// Add an event listener to the submit button
 const submitButton = document.querySelector('#submit');
 submitButton.addEventListener('click', checkAnswer);
-
-// Initial setup
-clueElement.textContent = clues[0].clue;
-imageElement.src = images[0];
-imageElement.style.display = 'none';
-timerElement.textContent = 'Timer goes here';
