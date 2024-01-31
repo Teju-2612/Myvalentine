@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Clues</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Valentine's Countdown</title>
 </head>
 <body>
-    <div id="container">
-        <div id="clue-container"></div>
-        <div id="letter-container"></div>
-        <form onsubmit="submitForm(); return false;">
-            <label for="word">Guess the word:</label>
-            <input type="text" id="word" required>
-            <button type="submit">Submit</button>
-        </form>
+    <div class="container">
+        <div class="hearts"></div>
+        <div class="content">
+            <div class="clue">Clue goes here</div>
+            <input type="text" id="answer" placeholder="Enter your answer here">
+            <button id="submit">Submit</button>
+            <div class="image"></div>
+            <div class="timer">Timer goes here</div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
