@@ -1,9 +1,12 @@
 const targetWords = ['Thank', 'you', 'for','being','mine','philtatos']; // Replace with your words for each day
 const clues = ['Be grateful', 'The man with the hottest body ever', '4','human-_____','you are?','my beloved']; // Replace with your clues for each day
 const loveLetterImages = [
-  'path/to/love_letter_1.png',
-  'path/to/love_letter_2.png',
-  'path/to/love_letter_3.png'
+  'loveletter1.png',
+  'loveletter1.png',
+  'loveletter1.png',
+  'loveletter1.png',
+  'loveletter1.png',
+  'loveletter1.png'
 ]; // Replace with the paths to your love letter images for each day
 
 let currentDay = 0;
