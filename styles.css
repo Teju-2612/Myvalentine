@@ -2,10 +2,14 @@ body {
     background-color: black;
 }
 
+body {
+    background-color: black;
+}
+
 .hearts {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -16,10 +20,10 @@ body {
 .hearts::after {
     content: "";
     position: absolute;
-    top: 50%;
+    top: -50%;
     left: 50%;
-    width: 200px;
-    height: 200px;
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
     background: url('heart.png') no-repeat;
     background-size: cover;
     border-radius: 50%;
@@ -28,6 +32,7 @@ body {
 }
 
 .hearts::after {
+    top: -150%; /* Adjust the starting position */
     animation-delay: -5s;
 }
 
@@ -35,8 +40,11 @@ body {
     0% {
         transform: translate(-50%, -50%) rotate(45deg);
     }
+    50% {
+        transform: translate(-50%, 100%) rotate(45deg); /* Move down */
+    }
     100% {
-        transform: translate(-50%, -50%) rotate(405deg);
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 
@@ -65,8 +73,8 @@ body {
 
 
 #submit {
-    width: 2em; /* Set the width */
-    height: 2em; /* Set the height */
+    width: 4em; /* Set the width */
+    height: 4em; /* Set the height */
     background-color: #ff5e62; /* Pink background color */
     color: white; /* White text color */
     border: none;
