@@ -26,28 +26,27 @@ function showImage(index, timerElement) {
     imageElement.src = images[index];
     imageElement.style.display = 'block';
 
-    if (index === 0) {
-        const timerDuration = 24 * 60 * 60 * 1000;
-        let startTime = Date.now();
+    const timerDuration = 24 * 60 * 60 * 1000;
+    let startTime = Date.now();
 
-        function updateTimer() {
-            const remainingTime = timerDuration - (Date.now() - startTime);
+    function updateTimer() {
+        const remainingTime = timerDuration - (Date.now() - startTime);
 
-            if (remainingTime < 0) {
-                startTime = Date.now();
-                return;
-            }
-
-            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            timerElement.textContent = timeString;
+        if (remainingTime < 0) {
+            startTime = Date.now();
+            return;
         }
-        setInterval(updateTimer, 1000);
+
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        timerElement.textContent = timeString;
     }
+
+    setInterval(updateTimer, 1000);
 }
 
 function checkAnswer() {
