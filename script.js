@@ -54,7 +54,7 @@ function checkAnswer() {
     
     // Get the current clue and image index
     const currentClue = clues[0];
-    const currentImageIndex = images.indexOf(`loveletter${currentClue.answer.toLowerCase()}.png`);
+    const currentImageIndex = images.findIndex(image => image.includes(currentClue.answer.toLowerCase()));
 
     console.log('User Input:', answer);
     console.log('Correct Answer:', currentClue.answer.toLowerCase());

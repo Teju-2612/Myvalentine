@@ -65,14 +65,26 @@ body {
 
 
 #submit {
-    padding: 0.5rem 2rem;
-    background-color: #dd4b70; /* Pink color */
+    width: 2em; /* Set the width */
+    height: 2em; /* Set the height */
+    background-color: #ff5e62; /* Pink background color */
     color: white; /* White text color */
     border: none;
+    border-radius: 50%; /* Create a circular shape */
     cursor: pointer;
-    border-radius: 50%; /* Make it a circle (heart shape) */
-    font-size: 16px; /* Adjust font size as needed */
+    font-size: 1.2em; /* Set the font size */
+    position: relative; /* Required for the ::before pseudo-element */
 }
+
+#submit::before {
+    content: '\2665'; /* Unicode heart symbol */
+    font-size: 1.2em; /* Set the font size */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 #submit:hover {
     background-color: #971b4d; /* Darker pink on hover */
