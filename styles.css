@@ -3,12 +3,13 @@ body {
     overflow: hidden; /* Prevent scrollbars due to heart animation */
 }
 
-.hearts {
-    position: fixed;
-    top: 0;
-    width: 50px; /* Adjust the width of the hearts */
-    height: 50px; /* Adjust the height of the hearts */
-    animation: flyHeartsLeft 5s linear infinite alternate, flyHeartsRight 5s linear infinite alternate; /* Add right side animation */
+@keyframes flyHeart {
+    0% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(50%);
+    }
 }
 
 .hearts::before,
@@ -16,38 +17,20 @@ body {
     content: "";
     position: absolute;
     top: 50%;
-    width: 100%; /* Set the width to 100% for responsiveness */
-    height: 100%; /* Set the height to 100% for responsiveness */
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
     background: url('heart.png') no-repeat;
     background-size: cover;
     border-radius: 50%;
+    animation: flyHeart 5s linear infinite alternate; /* Alternate for up and down */
 }
 
 .hearts::after {
-    transform: rotate(180deg); /* Rotate the heart for the second heart */
+    left: -10%; /* Adjust the left position for the second heart */
+    animation-delay: -2.5s; /* Delay for the second heart */
+    transform: rotateY(180deg); /* Rotate the heart on the right side */
 }
 
-@keyframes flyHeartsLeft {
-    0% {
-        left: -10%;
-        transform: translate(0, -50%);
-    }
-    100% {
-        left: 50%;
-        transform: translate(0, 50%);
-    }
-}
-
-@keyframes flyHeartsRight {
-    0% {
-        right: -10%; /* Set the right position for the second heart */
-        transform: translate(0, -50%);
-    }
-    100% {
-        right: 50%; /* Set the right position for the second heart */
-        transform: translate(0, 50%);
-    }
-}
 
 /* Remaining styles remain unchanged */
 
