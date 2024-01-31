@@ -1,6 +1,3 @@
-const targetWords = ['Thank', 'you', 'for', 'being', 'mine', 'philtatos'];
-const clues = ['Be grateful', 'The man with the hottest body ever', '4', 'human-_____', 'you are?', 'my beloved'];
-// Sample clues and images
 const clues = [
     { clue: 'Be grateful', answer: 'Thank' },
     { clue: 'The man with the hottest body ever', answer: 'you' },
@@ -8,7 +5,7 @@ const clues = [
     { clue: 'human-_____', answer: 'being' },
     { clue: 'you are?', answer: 'mine' },
     { clue: 'my beloved', answer: 'philtatos' },
-    // ...
+    // Add more clues as needed
 ];
 
 const images = [
@@ -18,17 +15,15 @@ const images = [
     'loveletter1.png',
     'loveletter1.png',
     'loveletter1.png',
-    // ...
+    // Add more image paths as needed
 ];
 
-// Set the initial clue and image
 const clueElement = document.querySelector('.clue');
 const imageElement = document.querySelector('.image');
 clueElement.textContent = clues[0].clue;
 imageElement.src = images[0];
 imageElement.style.display = 'block';
 
-// Function to show the image and start the timer
 function showImage(index) {
     imageElement.src = images[index];
     imageElement.style.display = 'block';
@@ -56,7 +51,6 @@ function showImage(index) {
     setInterval(updateTimer, 1000);
 }
 
-// Function to check the answer
 function checkAnswer() {
     const answerInput = document.querySelector('#answer');
     const answer = answerInput.value.trim().toLowerCase();
@@ -65,20 +59,13 @@ function checkAnswer() {
     if (answer === clue.answer) {
         showImage(0);
 
-        // Clear the input field
         answerInput.value = '';
-
-        // Remove the first clue from the array
         clues.shift();
-
-        // Remove the first image from the array
         images.shift();
 
-        // Update the clue and image
         clueElement.textContent = clues[0].clue;
         imageElement.src = images[0];
 
-        // Reset the input field
         answerInput.focus();
     } else {
         alert('Incorrect answer. Try again.');
@@ -86,8 +73,5 @@ function checkAnswer() {
     }
 }
 
-// Add an event listener to the submit button
 const submitButton = document.querySelector('#submit');
 submitButton.addEventListener('click', checkAnswer);
-
-// Start the timer here
