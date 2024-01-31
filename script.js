@@ -12,7 +12,7 @@ const loveLetterImages = [
 let currentDay = 0;
 
 function showClue() {
-  const letterContainer = document.getElementById('letter-container');
+  const letterContainer = document.getElementById('clue-container');
   clueContainer.innerHTML = `Clue: ${clues[currentDay]}`;
 }
 
