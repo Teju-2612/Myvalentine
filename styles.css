@@ -51,13 +51,18 @@ body {
     text-align: center;
 }
 
+/* Existing styles remain unchanged */
+
 #answer {
-    width: 50%;
+    width: 100%; /* Set the width to 100% to match the parent container */
     padding: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: block;
 }
+
+/* Remaining styles remain unchanged */
+
 
 #submit {
     padding: 0.5rem 2rem;

@@ -54,24 +54,38 @@ function showImage(index) {
 function checkAnswer() {
     const answerInput = document.querySelector('#answer');
     const answer = answerInput.value.trim().toLowerCase();
-    const clue = clues[0];
+    
+    // Get the current clue and image index
+    const currentClue = clues[0];
+    const currentImageIndex = targetWords.indexOf(currentClue.answer);
 
-    if (answer === clue.answer) {
-        showImage(0);
+    console.log('User Input:', answer);
+    console.log('Correct Answer:', currentClue.answer.toLowerCase());
 
+    if (answer === currentClue.answer.toLowerCase()) {
+        showImage(currentImageIndex);
+
+        // Clear the input field
         answerInput.value = '';
+
+        // Remove the first clue from the array
         clues.shift();
+
+        // Remove the first image from the array
         images.shift();
 
+        // Update the clue and image
         clueElement.textContent = clues[0].clue;
         imageElement.src = images[0];
 
+        // Reset the input field
         answerInput.focus();
     } else {
         alert('Incorrect answer. Try again.');
         answerInput.focus();
     }
 }
+
 
 const submitButton = document.querySelector('#submit');
 submitButton.addEventListener('click', checkAnswer);
