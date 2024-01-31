@@ -20,9 +20,7 @@ const images = [
 
 const clueElement = document.querySelector('.clue');
 const imageElement = document.querySelector('.image');
-clueElement.textContent = clues[0].clue;
-imageElement.src = images[0];
-imageElement.style.display = 'block';
+const timerElement = document.querySelector('.timer');
 
 function showImage(index) {
     imageElement.src = images[index];
@@ -30,7 +28,6 @@ function showImage(index) {
 
     const timerDuration = 24 * 60 * 60 * 1000;
     let startTime = Date.now();
-    const timerElement = document.querySelector('.timer');
 
     function updateTimer() {
         const remainingTime = timerDuration - (Date.now() - startTime);
@@ -57,7 +54,7 @@ function checkAnswer() {
     
     // Get the current clue and image index
     const currentClue = clues[0];
-    const currentImageIndex = targetWords.indexOf(currentClue.answer);
+    const currentImageIndex = images.indexOf(`loveletter${currentClue.answer.toLowerCase()}.png`);
 
     console.log('User Input:', answer);
     console.log('Correct Answer:', currentClue.answer.toLowerCase());
@@ -71,12 +68,12 @@ function checkAnswer() {
         // Remove the first clue from the array
         clues.shift();
 
-        // Remove the first image from the array
-        images.shift();
-
         // Update the clue and image
-        clueElement.textContent = clues[0].clue;
-        imageElement.src = images[0];
+        if (clues.length > 0) {
+            clueElement.textContent = clues[0].clue;
+        } else {
+            clueElement.textContent = 'All letters revealed!';
+        }
 
         // Reset the input field
         answerInput.focus();
@@ -86,6 +83,11 @@ function checkAnswer() {
     }
 }
 
-
 const submitButton = document.querySelector('#submit');
 submitButton.addEventListener('click', checkAnswer);
+
+// Initial setup
+clueElement.textContent = clues[0].clue;
+imageElement.src = images[0];
+imageElement.style.display = 'none';
+timerElement.textContent = 'Timer goes here';
