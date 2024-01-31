@@ -4,8 +4,7 @@ const clues = [
     { clue: '4', answer: 'for' },
     { clue: 'human-_____', answer: 'being' },
     { clue: 'you are?', answer: 'mine' },
-    { clue: 'my beloved', answer: 'philtatos' },
-    // Add more clues as needed
+    { clue: 'my beloved', answer: 'philtatos' }
 ];
 
 const images = [
@@ -14,8 +13,7 @@ const images = [
     'loveletter1.png',
     'loveletter1.png',
     'loveletter1.png',
-    'loveletter1.png',
-    // Add more image paths as needed
+    'loveletter1.png'
 ];
 
 const clueElement = document.querySelector('.clue');
@@ -24,48 +22,32 @@ const timerElement = document.querySelector('.timer');
 
 let currentClueIndex = 0;
 
-function showImage() {
-    imageElement.src = images[currentClueIndex];
+function showImage(index, timerElement) {
+    imageElement.src = images[index];
     imageElement.style.display = 'block';
-}
 
-function updateTimer() {
-    const timerDuration = 24 * 60 * 60 * 1000;
-    let startTime = Date.now();
+    if (index === 0) {
+        const timerDuration = 24 * 60 * 60 * 1000;
+        let startTime = Date.now();
 
-    function calculateRemainingTime() {
-        const remainingTime = timerDuration - (Date.now() - startTime);
+        function updateTimer() {
+            const remainingTime = timerDuration - (Date.now() - startTime);
 
-        if (remainingTime < 0) {
-            startTime = Date.now();
-            return 0;
+            if (remainingTime < 0) {
+                startTime = Date.now();
+                return;
+            }
+
+            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            timerElement.textContent = timeString;
         }
-
-        return remainingTime;
+        setInterval(updateTimer, 1000);
     }
-
-    function formatTime(milliseconds) {
-        const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
-
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function update() {
-        const remainingTime = calculateRemainingTime();
-        const formattedTime = formatTime(remainingTime);
-
-        timerElement.textContent = formattedTime;
-
-        if (remainingTime === 0) {
-            clearInterval(timerInterval);
-        }
-    }
-
-    update(); // Initial update
-
-    const timerInterval = setInterval(update, 1000);
 }
 
 function checkAnswer() {
@@ -74,7 +56,7 @@ function checkAnswer() {
     const currentClue = clues[currentClueIndex];
 
     if (answer === currentClue.answer.toLowerCase()) {
-        showImage();
+        showImage(currentClueIndex, timerElement);
 
         // Clear the input field
         answerInput.value = '';

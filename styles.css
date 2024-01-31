@@ -16,12 +16,12 @@ body {
 .hearts::after {
     content: "";
     position: absolute;
-    top: 50%;
-    width: 50px; /* Adjust the width as needed */
-    height: 50px; /* Adjust the height as needed */
+    top: 100%;
+    width: 90px; /* Adjust the width as needed */
+    height: 90px; /* Adjust the height as needed */
     background: url('heart.png') no-repeat;
     background-size: cover;
-    animation: flyHeart 5s linear infinite alternate; /* Alternate for up and down */
+    animation: flyHeart 10s linear infinite alternate; /* Alternate for up and down */
 }
 
 .hearts::after {
