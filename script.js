@@ -22,31 +22,41 @@ const timerElement = document.querySelector('.timer');
 
 let currentClueIndex = 0;
 
-function showImage(index, timerElement) {
-    imageElement.src = images[index];
-    imageElement.style.display = 'block';
+function showImage() {
+    if (currentClueIndex < images.length) {
+        imageElement.src = images[currentClueIndex];
+        imageElement.style.display = 'block';
 
-    const timerDuration = 24 * 60 * 60 * 1000;
-    let startTime = Date.now();
+        // Start the timer only for the first image
+        if (currentClueIndex === 0) {
+            const timerDuration = 24 * 60 * 60 * 1000;
+            let startTime = Date.now();
 
-    function updateTimer() {
-        const remainingTime = timerDuration - (Date.now() - startTime);
+            function updateTimer() {
+                const remainingTime = timerDuration - (Date.now() - startTime);
 
-        if (remainingTime < 0) {
-            startTime = Date.now();
-            return;
+                if (remainingTime < 0) {
+                    startTime = Date.now();
+                    return;
+                }
+
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                timerElement.textContent = timeString;
+            }
+
+            setInterval(updateTimer, 1000);
         }
 
-        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-        const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-        timerElement.textContent = timeString;
+        // Increment the index for the next image
+        currentClueIndex++;
+    } else {
+        alert('All clues revealed!');
     }
-
-    setInterval(updateTimer, 1000);
 }
 
 function checkAnswer() {
@@ -55,20 +65,14 @@ function checkAnswer() {
     const currentClue = clues[currentClueIndex];
 
     if (answer === currentClue.answer.toLowerCase()) {
-        showImage(currentClueIndex, timerElement);
+        showImage();
 
         // Clear the input field
         answerInput.value = '';
 
-        // Increment the clue index
-        currentClueIndex++;
-
+        // Show the next clue
         if (currentClueIndex < clues.length) {
-            // Show the next clue and start the timer
             clueElement.textContent = clues[currentClueIndex].clue;
-            updateTimer();
-        } else {
-            alert('All clues revealed!');
         }
 
         // Reset the input field
@@ -82,6 +86,5 @@ function checkAnswer() {
 const submitButton = document.querySelector('#submit');
 submitButton.addEventListener('click', checkAnswer);
 
-// Initialize the first clue and start the timer
+// Initialize the first clue
 clueElement.textContent = clues[currentClueIndex].clue;
-updateTimer();
